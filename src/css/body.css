@@ -13,3 +13,45 @@ body {
   color: #333333;
   line-height: 1;
 }
+.tabs-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.activity-tab{
+  width: 50%;
+}
+.activity-tab button{
+  padding: 10px 15px;
+  border: none;
+  font-size: 18px;
+  width: 100%;
+ font-family: Arial;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.active-tab button{
+  font-weight: 600;
+  border-bottom: 2px solid red;
+}
+.custom-button button{
+  margin: 15px 0 0 20px;
+  padding: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+.date-container{
+  text-align: center;
+}
+.single-list{
+  display: flex;
+  width: 90%;
+  margin: 10px auto;
+  border-radius: 5px;
+  cursor: pointer;
+  align-items: center;
+  border: 1px solid black;
+  padding: 10px;
+  justify-content: space-around;
+}
