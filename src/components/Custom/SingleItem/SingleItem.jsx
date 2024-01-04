@@ -3,7 +3,6 @@ import MoreDetails from "../MoreDetails/MoreDetails.jsx"
 export default function SingleItem({listItem,activeTab,updateCallStatus}){
     const [showMore,setShowMore]=useState(false)
     const showMoreDetails=(data)=>{
-        console.log(data)
         setShowMore(true)
     }
     const closeMoreDetails=()=>{

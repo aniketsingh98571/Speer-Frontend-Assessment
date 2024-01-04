@@ -15,7 +15,6 @@ const getCallDetails=async()=>{
     console.log(err)
     alert("Something went wrong")
   }
-    console.log(callDetails)
     setCallDetailsData(callDetails.data)
 }
 const changeCallStatus=async()=>{
@@ -29,9 +28,7 @@ const changeCallStatus=async()=>{
     }
     catch(err){
         console.log(err)
-        console.log(changeStatusResponse)
     }
-    console.log(changeStatusResponse)
     if(changeStatusResponse.status===200){
         setServerResponse("Call Updated")
         updateCallStatus(callId)

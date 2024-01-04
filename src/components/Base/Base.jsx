@@ -3,7 +3,6 @@ import Intermediate from "../Intermediate/Intermediate.jsx"
 export default function Base(){
     const [activeTab,setActiveTab]=useState("Activity")
     const activeTabHandler=(state)=>{
-        console.log(state)
         setActiveTab(state)
     }
     return(

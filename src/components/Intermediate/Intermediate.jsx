@@ -13,7 +13,6 @@ export default function Intermediate({activeTab}){
      let data;
     try{
          data=await getRequest("activities")
-        console.log(data.data)
       }
       catch(err){
         console.log(err)
@@ -23,12 +22,10 @@ export default function Intermediate({activeTab}){
         const nonArchiveData=sortDataByDate.filter((item)=>{
             return !item.is_archived
         })
-        console.log(nonArchiveData,"nonn archive")
         setActivities(nonArchiveData)
         const archiveData = sortDataByDate.filter((item)=>{
             return item.is_archived
         })
-        console.log(archiveData,"archive")
         setArchive(archiveData)
     }
     const updateCallStatus=(callId)=>{
@@ -76,7 +73,6 @@ export default function Intermediate({activeTab}){
         setActivities([])
         setArchive(prevArchives)
         const data=await updateDataRequest(prevActivities)
-        console.log(data)
     }
     const unArchiveAll=async()=>{
         const prevArchives=[...archive]
@@ -84,7 +80,6 @@ export default function Intermediate({activeTab}){
         setActivities(prevActivities)
         setArchive([])
         const data=await updateDataRequest(prevArchives)
-        console.log(data)
     }
     return (
        <div className="outer-intermediate">
