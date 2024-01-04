@@ -1,8 +1,24 @@
-import React from "react"
-export default function SingleItem({listItem,activeTab}){
-    console.log(listItem)
+import React,{useState} from "react"
+import MoreDetails from "../MoreDetails/MoreDetails.jsx"
+export default function SingleItem({listItem,activeTab,updateCallStatus}){
+    const [showMore,setShowMore]=useState(false)
+    const showMoreDetails=(data)=>{
+        console.log(data)
+        setShowMore(true)
+    }
+    const closeMoreDetails=()=>{
+        setShowMore(false)
+    }
     return (
         <div className="single-list-container">
+            {
+            <div className="hidden-more">
+                {
+                    showMore?
+                    <MoreDetails closeMoreDetails={closeMoreDetails} updateCallStatus={updateCallStatus} callId={listItem.id}/>:null
+                }
+            </div>
+            }
             {
             listItem.call_type==="voicemail"||listItem.call_type==="missed"&&
            <div className="outer-list"> 
@@ -18,6 +34,9 @@ export default function SingleItem({listItem,activeTab}){
                     </div>
                     <div className="time-container">
                         {`${new Date(listItem.created_at).getHours()}:${new Date(listItem.created_at).getMinutes()}`}
+                    </div>
+                    <div className="more-container">
+                        <button type="button" onClick={()=>showMoreDetails(listItem)}>Show More</button>
                     </div>
                 </div>
             </div>

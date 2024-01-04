@@ -1,0 +1,66 @@
+import React,{useEffect,useState} from "react"
+import {getRequest,patchRequest} from '../../Server/axiosClient/axiosClient'
+export default function MoreDetails({callId,closeMoreDetails,updateCallStatus}){
+const [callDetailsData,setCallDetailsData]=useState({})
+const [serverResponse,setServerResponse]=useState("")
+useEffect(()=>{
+    getCallDetails()
+},[])
+const getCallDetails=async()=>{
+    let callDetails;
+ try{
+    callDetails=await getRequest(`activities/${callId}`)
+  }
+  catch(err){
+    console.log(err)
+    alert("Something went wrong")
+  }
+    console.log(callDetails)
+    setCallDetailsData(callDetails.data)
+}
+const changeCallStatus=async()=>{
+    setServerResponse("Please wait...")
+    const payload={
+        "is_archived": !callDetailsData.is_archived
+    }
+    let changeStatusResponse;
+    try{      
+     changeStatusResponse=await patchRequest(`activities/${callId}`,payload)
+    }
+    catch(err){
+        console.log(err)
+        console.log(changeStatusResponse)
+    }
+    console.log(changeStatusResponse)
+    if(changeStatusResponse.status===200){
+        setServerResponse("Call Updated")
+        updateCallStatus(callId)
+    }
+}
+    return (
+        <div className="more-details-outer">
+            <div className="more-details-inner">
+                <div className="top-container">
+                    <div className="top-text">
+                        <p>Call Details</p>
+                    </div>
+                    <div className='cross-container'>
+                        <p onClick={closeMoreDetails}>&#x2716;</p>
+                    </div>
+                </div>
+                <div className="details-container">
+                    <p><span>Call Type:</span> {callDetailsData.call_type}</p>
+                    <p><span>When :</span> {`${new Date(callDetailsData.created_at)}`}</p>
+                    <p><span>From :</span> {callDetailsData.from}</p>
+                    <p><span>To:</span> {callDetailsData.to}</p>
+                    <div className="more-action-button">
+                        <button type="button" onClick={changeCallStatus}>
+                            {callDetailsData.is_archived?"Unarchive":"Archive"}
+                        </button>
+                    </div>
+                    <p>{serverResponse}</p>
+                </div>
+            </div>
+        </div>
+    )
+}

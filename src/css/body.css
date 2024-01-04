@@ -49,9 +49,50 @@ body {
   width: 90%;
   margin: 10px auto;
   border-radius: 5px;
-  cursor: pointer;
   align-items: center;
   border: 1px solid black;
   padding: 10px;
   justify-content: space-around;
+}
+.more-container button{
+  padding: 5px;
+  border: 1px solid black;
+  outline: none;
+  cursor: pointer;
+}
+.more-details-inner{
+  width: 376px;
+  height: 626px;
+  background-color: white;
+  position: absolute;
+  top: 100px;
+}
+.top-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.top-text p{
+  font-size: 18px;
+  font-weight: 600;
+}
+.cross-container p{
+  font-size: 20px;
+  cursor: pointer;
+}
+.details-container{
+  width: 80%;
+  margin: 0 auto;
+}
+.details-container span{
+  font-weight: 600;
+  font-size: 16px;
+}
+.more-action-button button{
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;  
+  cursor: pointer;
 }
