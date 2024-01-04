@@ -11,7 +11,7 @@ export default function SingleItem({listItem,activeTab,updateCallStatus}){
     return (
         <div className="single-list-container">
             {
-            <div className="hidden-more">
+            <div className={`hidden-more ${showMore ? 'slide-in' : 'slide-out'}`}>
                 {
                     showMore?
                     <MoreDetails closeMoreDetails={closeMoreDetails} updateCallStatus={updateCallStatus} callId={listItem.id}/>:null

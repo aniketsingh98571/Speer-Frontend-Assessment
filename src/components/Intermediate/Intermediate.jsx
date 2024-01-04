@@ -3,9 +3,11 @@ import Archived from "./Archived/Archived.jsx"
 import Activity from "./Activity/Activity.jsx"
 import { getRequest,patchRequest } from "../Server/axiosClient/axiosClient.js"
 import Button from "../Custom/Button/Button.jsx"
+import Loader from "../Custom/Loader/Loader.jsx"
 export default function Intermediate({activeTab}){
     const [activities,setActivities]=useState([])
     const [archive,setArchive]=useState([])
+    const [loading,setLoading]=useState(true)
     useEffect(()=>{
         getActivities()
     },[])
@@ -13,9 +15,11 @@ export default function Intermediate({activeTab}){
      let data;
     try{
          data=await getRequest("activities")
+         setLoading(false)
       }
       catch(err){
         console.log(err)
+        setLoading(false)
         alert("Something went wrong")
       }
         const sortDataByDate=data.data.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
@@ -90,6 +94,10 @@ export default function Intermediate({activeTab}){
                     <Button text="Unarchive All" action={unArchiveAll}/>
                 }
             </div>
+            {
+                loading&&
+                <Loader/>
+            }
             <div className="activity-container-intermediate">
                 {
                     activeTab==="Activity"?

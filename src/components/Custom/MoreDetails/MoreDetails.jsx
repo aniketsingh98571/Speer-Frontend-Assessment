@@ -1,8 +1,10 @@
 import React,{useEffect,useState} from "react"
 import {getRequest,patchRequest} from '../../Server/axiosClient/axiosClient'
+import Loader from '../Loader/Loader.jsx'
 export default function MoreDetails({callId,closeMoreDetails,updateCallStatus}){
 const [callDetailsData,setCallDetailsData]=useState({})
 const [serverResponse,setServerResponse]=useState("")
+const [loader,setLoader]=useState(true)
 useEffect(()=>{
     getCallDetails()
 },[])
@@ -10,9 +12,11 @@ const getCallDetails=async()=>{
     let callDetails;
  try{
     callDetails=await getRequest(`activities/${callId}`)
+    setLoader(false)
   }
   catch(err){
     console.log(err)
+    setLoader(false)
     alert("Something went wrong")
   }
     setCallDetailsData(callDetails.data)
@@ -45,6 +49,8 @@ const changeCallStatus=async()=>{
                         <p onClick={closeMoreDetails}>&#x2716;</p>
                     </div>
                 </div>
+               {
+                !loader?
                 <div className="details-container">
                     <p><span>Call Type:</span> {callDetailsData.call_type}</p>
                     <p><span>When :</span> {`${new Date(callDetailsData.created_at)}`}</p>
@@ -56,7 +62,8 @@ const changeCallStatus=async()=>{
                         </button>
                     </div>
                     <p>{serverResponse}</p>
-                </div>
+                </div>:<Loader/>
+                 }
             </div>
         </div>
     )
